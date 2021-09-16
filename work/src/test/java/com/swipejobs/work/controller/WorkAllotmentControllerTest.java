@@ -10,6 +10,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.Matchers.any;
@@ -36,7 +37,7 @@ public class WorkAllotmentControllerTest {
 
   @Test
   public void getWorkersList() throws Exception {
-    when(mockWorkAllotmentService.getJobsByWorkerId(any())).thenReturn(List.of(new JobDetails()));
+    when(mockWorkAllotmentService.getJobsByWorkerId(any())).thenReturn(Arrays.asList(new JobDetails()));
 
     this.mockMvc.perform(get("/api/v1/worker/jobs/0")).andExpect(status().isOk());
   }

@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,12 +35,12 @@ public final class WorkAllotmentServiceImplTest {
     when(mockWorkAllotmentEndPointsApi.getAllWorkers()).thenReturn(getWorkers());
     when(mockWorkAllotmentEndPointsApi.getAllJobs()).thenReturn(getJobs());
 
-    List<JobDetails> workAllotmentRespons =
+    List<JobDetails> workAllotmentResponse =
         workAllotmentService.getJobsByWorkerId(1);
 
-    assertEquals(3, workAllotmentRespons.size());
+    assertEquals(3, workAllotmentResponse.size());
     // Asserting only the job ids.
-    assertEquals(List.of(3, 4, 5), workAllotmentRespons.stream().map(JobDetails::getJobId).collect(Collectors.toList()));
+    assertEquals(Arrays.asList(3, 4, 5), workAllotmentResponse.stream().map(JobDetails::getJobId).collect(Collectors.toList()));
   }
 
   private List<Worker> getWorkers() {
@@ -48,7 +49,7 @@ public final class WorkAllotmentServiceImplTest {
     // Has driving licence and certificates.
     worker1.setUserId(1);
     worker1.setHasDriversLicense(true);
-    worker1.setCertificates(List.of(
+    worker1.setCertificates(Arrays.asList(
         "C", "CC",
         "D", "DD",
         "E", "EE"
@@ -56,7 +57,7 @@ public final class WorkAllotmentServiceImplTest {
     // Has driving licence but no certificates are there.
     worker2.setUserId(2);
     worker2.setHasDriversLicense(true);
-    return List.of(worker1, worker2);
+    return Arrays.asList(worker1, worker2);
   }
 
   private List<Job> getJobs() {
@@ -64,28 +65,28 @@ public final class WorkAllotmentServiceImplTest {
     job1.setJobId(1);
     job1.setWorkersRequired(2);
     job1.setDriverLicenseRequired(true);
-    job1.setRequiredCertificates(List.of("A", "AA"));
+    job1.setRequiredCertificates(Arrays.asList("A", "AA"));
     Job job2 = new Job();
     job2.setJobId(2);
     job2.setWorkersRequired(2);
     job2.setDriverLicenseRequired(false);
-    job2.setRequiredCertificates(List.of("B", "BB"));
+    job2.setRequiredCertificates(Arrays.asList("B", "BB"));
     Job job3 = new Job();
     job3.setJobId(3);
     job3.setWorkersRequired(2);
     job3.setDriverLicenseRequired(true);
-    job3.setRequiredCertificates(List.of("C", "CC"));
+    job3.setRequiredCertificates(Arrays.asList("C", "CC"));
     Job job4 = new Job();
     job4.setJobId(4);
     job4.setWorkersRequired(2);
     job4.setDriverLicenseRequired(true);
-    job4.setRequiredCertificates(List.of("D", "DD"));
+    job4.setRequiredCertificates(Arrays.asList("D", "DD"));
     Job job5 = new Job();
     job5.setJobId(5);
     job5.setWorkersRequired(2);
     job5.setDriverLicenseRequired(true);
-    job5.setRequiredCertificates(List.of("E", "EE"));
+    job5.setRequiredCertificates(Arrays.asList("E", "EE"));
 
-    return List.of(job1, job2, job3, job4, job5);
+    return Arrays.asList(job1, job2, job3, job4, job5);
   }
 }
