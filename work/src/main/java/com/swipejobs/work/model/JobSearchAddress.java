@@ -3,9 +3,9 @@ package com.swipejobs.work.model;
 public class JobSearchAddress {
 
     private String unit;
-    private Integer maxJobDistance;
-    private String longitude;
-    private String latitude;
+    private Integer maxJobDistance = 0;
+    private String longitude = "0";
+    private String latitude = "0";
 
     public String getUnit() {
         return unit;

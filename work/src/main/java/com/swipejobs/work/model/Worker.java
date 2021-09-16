@@ -13,10 +13,17 @@ public class Worker {
     private List<DayAvailability> availability;
     private boolean hasDriversLicense;
     private String transportation;
-    private JobSearchAddress jobSearchAddress;
+    private JobSearchAddress jobSearchAddress = new JobSearchAddress();
     private List<String>skills;
     private List<String>certificates;
     private boolean isActive;
+
+    public Worker() {
+    }
+
+    public Worker(Integer userId) {
+        this.userId = userId;
+    }
 
     public Integer getRating() {
         return rating;
