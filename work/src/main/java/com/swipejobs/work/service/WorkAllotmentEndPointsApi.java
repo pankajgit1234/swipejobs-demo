@@ -17,34 +17,34 @@ import java.util.List;
 @Component
 public class WorkAllotmentEndPointsApi {
 
-  @Autowired
-  private RestTemplate restTemplate;
+    @Autowired
+    private RestTemplate restTemplate;
 
-  @Value("${api.worker.url}")
-  private String workerUrl;
+    @Value("${api.worker.url}")
+    private String workerUrl;
 
-  @Value("${api.job.url}")
-  private String jobsUrl;
+    @Value("${api.job.url}")
+    private String jobsUrl;
 
-  public List<Job> getAllJobs() {
-    ResponseEntity<List<Job>> jobsResponseEntity = restTemplate.exchange(
-        jobsUrl,
-        HttpMethod.GET,
-        null,
-        new ParameterizedTypeReference() {
-        });
+    public List<Job> getAllJobs() {
+        ResponseEntity<List<Job>> jobsResponseEntity = restTemplate.exchange(
+                jobsUrl,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<Job>>() {
+                });
 
-    return Collections.unmodifiableList(jobsResponseEntity.getBody());
-  }
+        return Collections.unmodifiableList(jobsResponseEntity.getBody());
+    }
 
-  public List<Worker> getAllWorkers() {
-    ResponseEntity<List<Worker>> workersResponseEntity = restTemplate.exchange(
-        workerUrl,
-        HttpMethod.GET,
-        null,
-        new ParameterizedTypeReference() {
-        });
+    public List<Worker> getAllWorkers() {
+        ResponseEntity<List<Worker>> workersResponseEntity = restTemplate.exchange(
+                workerUrl,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<Worker>>() {
+                });
 
-    return Collections.unmodifiableList(workersResponseEntity.getBody());
-  }
+        return Collections.unmodifiableList(workersResponseEntity.getBody());
+    }
 }

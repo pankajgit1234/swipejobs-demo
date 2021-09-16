@@ -9,25 +9,30 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Controller to fetch the suitable jobs for a worker.
  */
-@RequestMapping("/api/v1/worker/jobs/")
+@RequestMapping("/api/v1/jobs/")
 @RestController
 public class WorkAllotmentController {
 
-  private WorkAllotmentService workAllotmentService;
+    private WorkAllotmentService workAllotmentService;
 
-  WorkAllotmentController(WorkAllotmentService workAllotmentService) {
-    this.workAllotmentService = workAllotmentService;
-  }
+    WorkAllotmentController(WorkAllotmentService workAllotmentService) {
+        this.workAllotmentService = workAllotmentService;
+    }
 
-  @GetMapping("/{workerId}")
-  public ResponseEntity<List<JobDetails>> getWorksByWorkerId(@PathVariable Integer workerId) {
-    List<JobDetails> jobs = workAllotmentService.getJobsByWorkerId(workerId);
+    @GetMapping("worker/{workerId}")
+    public ResponseEntity<List<JobDetails>> getWorksByWorkerId(@PathVariable Integer workerId) {
+        List<JobDetails> jobs = workAllotmentService.getJobsByWorkerId(workerId);
+        if(jobs==null)
+        {
+            return new ResponseEntity<>(new ArrayList<JobDetails>(),HttpStatus.NOT_FOUND);
+        }
 
-    return new ResponseEntity<>(jobs, HttpStatus.OK);
-  }
+        return new ResponseEntity<>(jobs, HttpStatus.OK);
+    }
 }
